@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>
+            PARKING SLOT
+        </title>
+        <script>
+            function register() {
+                var vehicleNum = document.getElementById("vehicleNo").value;
+                var addUrl = "http://localhost:8000/vehicleNum?vehicleNum=" + vehicleNum;
+                fetch(addUrl)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(myJson) {
+                    console.log("RESPONSE: ", myJson.result);
+                    document.getElementById("register").innerHTML = myJson.result;
+                });
+            }
+        </script>
+    </head>
+    <body align = "center">
+        <br>
+        <font face="Aerial" size="5">
+        <b><h1>Parking Slot System</h1></b></font>
+        <hr>
+        <br>
+        Vehicle Number: &nbsp;
+        <input type = "text" name = "Vehicle Num" id = "vehicleNo"> 
+        <br><br> <a href="javascript:alert('Registered successfully.');">
+        <input type = "button" onclick = "register()" value = "Register">
+       </a>
+       <br><br>
+        <a href="/home/tushar/Desktop/ParkingLot/client/park.html">Go Park</a>
+    </body>
+</html>
