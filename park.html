@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>
+            PARKING SLOT
+        </title>
+        <script>
+            function register() {
+                var vehicleNum = document.getElementById("vehicleNo").value;
+                var addUrl = "http://localhost:8000/vehicleNum?vehicleNum=" + vehicleNum;
+                fetch(addUrl)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(myJson) {
+                    console.log("RESPONSE: ", myJson.result);
+                    document.getElementById("register").innerHTML = myJson.result;
+                });
+            }
+            function availableSlot() {
+                var addUrl = "http://localhost:8000/availableSlot";
+                fetch(addUrl)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(myJson) {
+                    console.log("RESPONSE: ", myJson.result); // Check here
+                    // document.getElementById("availslot").innerHTML = myJson.result;
+                    document.getElementById("availslot").innerHTML = JSON.stringify(myJson.result); // updated line. check the result
+                });
+            }
+            function chooseSlot() {
+                var slotNum = document.getElementById("slotNo").value;
+                var vehicleNum = document.getElementById("vehicleNo").value;
+                var addUrl = "http://localhost:8000/chooseSlot?slotNum=" + slotNum + "&vehicleNum=" + vehicleNum;
+                fetch(addUrl)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(myJson) {
+                    console.log("RESPONSE: ", myJson.result);
+                    document.getElementById("register").innerHTML = myJson.result;
+                });
+            }
+            function removeVehicle() {
+                var vehicleNum = document.getElementById("vehicleNo").value;
+                var addUrl = "http://localhost:8000/removeVehicle?vehicleNum=" + vehicleNum;
+                fetch(addUrl)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(myJson) {
+                    console.log("RESPONSE: ", myJson.result);
+                    document.getElementById("charges").innerHTML = myJson.result;
+                });
+            }
+        </script>
+    </head>
+    <body align = "center">
+        <br>
+        <font face="Aerial" size="5">
+        <b><h1>Parking Slot System</h1></b></font>
+        <hr>
+        <br>
+        Vehicle Number: &nbsp;
+        <input type = "text" name = "Vehicle Num" id = "vehicleNo"> 
+        &nbsp; &nbsp;
+        <button onclick = "register()">Register</button> 
+        <br><br>
+        Check available slot: &nbsp; &nbsp; 
+        <button onclick = "availableSlot()">Check</button> 
+        <br><br>
+        <textarea id = "availslot">Available slots</textarea>
+        <br><br>
+        Choose slot: &nbsp; &nbsp;
+        <input type = "text" name = "Choose slot" id = "slotNo">
+        &nbsp; &nbsp;
+        <button onclick = "chooseSlot()">Park Vehicle</button>
+        <br><br>
+        Checkout: &nbsp; &nbsp;
+        <button onclick = "removeVehicle()">Checkout</button>
+        <br><br>
+        <textarea id = "charges">Charges</textarea>
+    </body>
+</html>
