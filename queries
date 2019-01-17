@@ -1,0 +1,9 @@
+create database parkinglot;
+
+use parkinglot;
+
+create table vehicle(regNo int, status int);
+
+create table info(indexNum int, regNo int, parkingSlot int, charges int);
+
+insert into info values(1,0,0,0);
